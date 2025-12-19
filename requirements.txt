@@ -5,3 +5,4 @@ seaborn
 scikit-learn
 ydata_profiling
 setuptools
+association_metrics
