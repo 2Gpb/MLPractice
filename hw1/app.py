@@ -13,14 +13,6 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 TRAIN_PATH = DATA_DIR / "train.csv"
 TEST_PATH = DATA_DIR / "test.csv"
 
-def get_options(df, col):
-    # чтобы не было NaN в списке и чтобы всё было строками
-    return sorted(df[col].dropna().astype(str).unique().tolist())
-
-
-NUM_COLS = ["year", "km_driven", "mileage", "engine", "max_power", "seats"]
-CAT_COLS = ["fuel", "seller_type", "transmission", "owner"]
-
 
 @st.cache_resource
 def load_model():
@@ -39,6 +31,9 @@ def load_file(file):
     return pd.read_csv(file)
 
 st.set_page_config("Linear regression", page_icon="🚗")
+
+def get_options(df, col):
+    return sorted(df[col].dropna().astype(str).unique().tolist())
 
 
 try:
@@ -60,9 +55,6 @@ st.title("Предсказание стоимости автомобиля")
 tab_train, tab_test, tab_model, tab_pred = st.tabs(
     ["EDA: train", "EDA: test", "Model", "Predict"]
 )
-
-
-
 
 with tab_train:
     st.markdown("# EDA на трейне")
@@ -109,6 +101,7 @@ with tab_train:
     fig, ax = plt.subplots()
     sns.heatmap(TRAIN.corr(numeric_only=True, method="kendall"), cmap="Blues", annot=True, ax=ax)
     st.pyplot(fig, clear_figure=True)
+
 with tab_test:
     st.header("EDA на тесте")
 
@@ -138,6 +131,7 @@ with tab_test:
     fig, ax = plt.subplots()
     sns.heatmap(TEST.corr(numeric_only=True, method="pearson"), cmap="Blues", annot=True, ax=ax)
     st.pyplot(fig, clear_figure=True)
+
 with tab_model:
     st.header("Визуализация весов модели")
 
@@ -169,7 +163,7 @@ with tab_pred:
     elif choice == "Ввести руками":
         st.write("Введите признаки")
 
-        cat_options = {c: get_options(TRAIN, c) for c in CAT_COLS if c in TRAIN.columns}
+        cat_options = {c: get_options(TRAIN, c) for c in ["fuel", "seller_type", "transmission", "owner"] if c in TRAIN.columns}
 
         with st.form("manual_input"):
             c1, c2 = st.columns(2)
