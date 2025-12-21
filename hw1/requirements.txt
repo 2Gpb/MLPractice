@@ -1,0 +1,9 @@
+pandas
+numpy
+matplotlib
+seaborn
+ydata_profiling
+association_metrics
+scikit-learn
+streamlit
+jupyterlab
