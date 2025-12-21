@@ -8,7 +8,7 @@ import seaborn as sns
 
 
 MODEL_DIR = Path(__file__).resolve().parent / "models"
-MODEL_PATH = MODEL_DIR / "linear_model_l2.pkl"
+MODEL_PATH = MODEL_DIR / "linear_model_l2_pipe.pkl"
 DATA_DIR = Path(__file__).resolve().parent / "data"
 TRAIN_PATH = DATA_DIR / "train.csv"
 TEST_PATH = DATA_DIR / "test.csv"
