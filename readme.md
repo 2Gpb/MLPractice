@@ -1,1 +1,1 @@
-# Machine learning course at HSE
+# Machine learning practice tasks
